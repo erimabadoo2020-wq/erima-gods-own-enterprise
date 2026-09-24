@@ -63,17 +63,23 @@ export default function CheckoutPage() {
     }
 
     try {
-      await fetch('/api/send-order-email', {
+      await fetch('/api/notify-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId: order.id }),
+        body: JSON.stringify({
+          customer_name: name,
+          customer_phone: phone,
+          delivery_address: address,
+          total,
+          orderId: order.id,
+        }),
       });
     } catch (e) {
       console.error('Email notification failed:', e);
     }
 
     clearCart();
-    router.push(`/order-confirmation?orderId=${order.id}`);
+    router.push(`/order-confirmation?order=${order.id}`);
   };
 
   const handlePaystackSuccess = async (reference: any) => {
