@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useCart } from '@/lib/cart-context'
+import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
 export default function CartPage() {
@@ -9,13 +10,7 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#f5f1e8]">
-      <header className="flex items-center justify-between px-8 py-6 border-b border-[#c9a24b]/20">
-        <Link href="/" className="font-display text-xl tracking-widest text-[#c9a24b]">ERIMAGODSOWN</Link>
-        <nav className="hidden md:flex gap-8 text-sm tracking-wide text-[#f5f1e8]/80">
-          <Link href="/" className="hover:text-[#c9a24b] transition-colors">Home</Link>
-          <Link href="/shop" className="hover:text-[#c9a24b] transition-colors">Shop</Link>
-        </nav>
-      </header>
+      <Header />
 
       <section className="px-8 py-16 max-w-3xl mx-auto">
         <h1 className="font-display text-3xl mb-10">Your Cart</h1>

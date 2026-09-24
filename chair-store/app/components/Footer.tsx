@@ -1,11 +1,17 @@
+import Image from 'next/image'
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 mt-24">
       <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm text-[var(--muted)]">
         <div>
-          <p className="font-display text-lg text-[var(--ivory)] mb-3">
-            ERIMA GODS OWN <span className="text-[var(--gold)]">ENTERPRISE</span>
-          </p>
+          <Image
+            src="/logo.png"
+            alt="Erima God's Own Enterprise"
+            width={160}
+            height={124}
+            className="h-14 w-auto mb-3"
+          />
           <p>Premium chairs, crafted for those who notice the details.</p>
         </div>
         <div>

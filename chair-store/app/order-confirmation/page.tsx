@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
 type OrderItem = {
@@ -37,9 +38,7 @@ function OrderConfirmationContent() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#f5f1e8]">
-      <header className="flex items-center justify-between px-8 py-6 border-b border-[#c9a24b]/20">
-        <Link href="/" className="font-display text-xl tracking-widest text-[#c9a24b]">ERIMAGODSOWN</Link>
-      </header>
+      <Header />
 
       <section className="px-8 py-24 max-w-xl mx-auto text-center">
         <p className="text-[#c9a24b] text-sm tracking-[0.3em] mb-4">ORDER PLACED</p>

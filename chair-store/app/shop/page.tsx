@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
 export default async function Shop() {
@@ -8,13 +9,7 @@ export default async function Shop() {
 
   return (
     <div className="min-h-screen">
-      <header className="flex items-center justify-between px-8 py-6 border-b border-[#c9a24b]/20">
-        <Link href="/" className="font-display text-xl tracking-widest text-[#c9a24b]">ERIMAGODSOWN</Link>
-        <nav className="hidden md:flex gap-8 text-sm tracking-wide text-[#f5f1e8]/80">
-          <Link href="/" className="hover:text-[#c9a24b] transition-colors">Home</Link>
-          <Link href="/shop" className="hover:text-[#c9a24b] transition-colors">Shop</Link>
-        </nav>
-      </header>
+      <Header />
 
       <section className="px-8 py-16">
         <h1 className="font-display text-4xl text-center mb-16">Our Collection</h1>

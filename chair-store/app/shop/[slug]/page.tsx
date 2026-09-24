@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { useCart } from '@/lib/cart-context'
+import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
 type Product = {
@@ -50,15 +51,7 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen">
-      <header className="flex items-center justify-between px-8 py-6 border-b border-[#c9a24b]/20">
-        <Link href="/" className="font-display text-xl tracking-widest text-[#c9a24b]">ERIMAGODSOWN</Link>
-        <nav className="hidden md:flex gap-8 text-sm tracking-wide text-[#f5f1e8]/80">
-          <Link href="/" className="hover:text-[#c9a24b] transition-colors">Home</Link>
-          <Link href="/shop" className="hover:text-[#c9a24b] transition-colors">Shop</Link>
-          <Link href="/cart" className="hover:text-[#c9a24b] transition-colors">Cart</Link>
-        </nav>
-        <Link href="/cart" className="md:hidden text-sm text-[#c9a24b] tracking-wide">Cart</Link>
-      </header>
+      <Header />
 
       <section className="px-8 py-16 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         {product.image_url ? (
