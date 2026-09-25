@@ -29,8 +29,9 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 py-6 text-center text-xs text-[var(--muted)]">
-        © {new Date().getFullYear()} ErimaGodsOwnEnterprise. All rights reserved.
+      <div className="border-t border-white/10 py-6 text-center text-xs text-[var(--muted)] space-y-1">
+        <p>© {new Date().getFullYear()} ErimaGodsOwnEnterprise. All rights reserved.</p>
+        <p>Designed by PrideCultureTechnologies(BadMan)</p>
       </div>
     </footer>
   );
