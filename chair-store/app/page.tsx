@@ -15,10 +15,10 @@ export default async function Home() {
           CRAFTED FOR COMFORT
         </p>
         <h1 className="font-display text-5xl md:text-6xl leading-tight max-w-2xl mb-6">
-          Chairs built to hold your best moments
+          Furniture built to hold your best moments
         </h1>
         <p className="text-[#9a9a9a] max-w-md mb-10">
-          Executive, dining, and lounge chairs finished by hand — designed for homes and offices that don't settle for ordinary.
+          Executive, dining, and lounge furniture finished by hand — designed for homes and offices that don't settle for ordinary.
         </p>
         <a href="/shop" className="bg-[#c9a24b] text-black px-8 py-3 text-sm tracking-wide font-medium hover:bg-[#dab868] transition-colors">
           Shop the Collection
@@ -30,7 +30,7 @@ export default async function Home() {
           Shop by Category
         </h2>
         <p className="text-[#9a9a9a] text-center mb-16">
-          Find the right chair for every room
+          Find the right furniture for every room
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {categories?.map((cat) => (
@@ -47,7 +47,7 @@ export default async function Home() {
 
       <section className="px-8 py-20 border-t border-[#c9a24b]/20 text-center">
         <h2 className="font-display text-2xl mb-4">
-          Have a question about a chair?
+          Have a question about a piece of furniture?
         </h2>
         <p className="text-[#9a9a9a] mb-8">
           Chat with us directly on WhatsApp — we reply fast.
