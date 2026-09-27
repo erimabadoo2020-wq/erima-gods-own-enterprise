@@ -12,12 +12,12 @@ export default function Footer() {
             height={124}
             className="h-14 w-auto mb-3"
           />
-          <p>Premium chairs, crafted for those who notice the details.</p>
+          <p>Premium furniture, crafted for those who notice the details.</p>
         </div>
         <div>
           <p className="text-[var(--ivory)] mb-3">Shop</p>
           <ul className="space-y-2">
-            <li><a href="/shop" className="hover:text-[var(--gold)]">All chairs</a></li>
+            <li><a href="/shop" className="hover:text-[var(--gold)]">All furniture</a></li>
             <li><a href="/shop" className="hover:text-[var(--gold)]">Categories</a></li>
           </ul>
         </div>
