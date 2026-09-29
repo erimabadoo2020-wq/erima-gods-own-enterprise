@@ -23,8 +23,8 @@ export default function Header() {
       <nav className="hidden md:flex gap-8 text-sm tracking-wide text-[#f5f1e8]/80">
         <a href="/" className="hover:text-[#c9a24b] transition-colors">Home</a>
         <a href="/shop" className="hover:text-[#c9a24b] transition-colors">Shop</a>
-        <a href="#" className="hover:text-[#c9a24b] transition-colors">About</a>
-        <a href="#" className="hover:text-[#c9a24b] transition-colors">Contact</a>
+        <a href="/about" className="hover:text-[#c9a24b] transition-colors">About</a>
+        <a href="/contact" className="hover:text-[#c9a24b] transition-colors">Contact</a>
       </nav>
       <div className="flex items-center gap-4">
         <Link href="/cart" className="relative flex items-center text-[#f5f1e8]/80 hover:text-[#c9a24b] transition-colors">
