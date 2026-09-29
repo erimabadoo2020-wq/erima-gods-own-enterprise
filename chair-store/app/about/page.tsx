@@ -12,7 +12,7 @@ export default function AboutPage() {
           Furniture, built with hands that care
         </h1>
         <p className="text-[#9a9a9a] max-w-xl">
-          For over five years, ErimaGodsOwnEnterprise has been turning raw materials
+          For over 15 years, ErimaGodsOwnEnterprise has been turning raw materials
           into furniture people actually live with — pieces built to be used, not just looked at.
         </p>
       </section>
@@ -22,7 +22,7 @@ export default function AboutPage() {
         <p className="text-[#9a9a9a] leading-relaxed mb-4">
           ErimaGodsOwnEnterprise was founded by <span className="text-[#f5f1e8]">Erima Valentine Nwokeji</span>,
           who set out to build furniture that didn't force a choice between quality and
-          affordability. What began as a small workshop has grown, over more than five years,
+          affordability. What began as a small workshop has grown, over more than 15 years,
           into a trusted name for handmade sofas and furniture — without losing the attention
           to detail that started it all.
         </p>
