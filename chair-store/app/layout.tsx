@@ -14,8 +14,27 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ErimaGodsOwnEnterprise",
-  description: "Premium chairs, crafted for those who notice the details.",
+  title: {
+    default: "ErimaGodsOwnEnterprise | Premium Furniture, Handmade to Order",
+    template: "%s | ErimaGodsOwnEnterprise",
+  },
+  description:
+    "Premium handmade furniture — sofas, chairs, and more — finished by hand and delivered nationwide across Nigeria. Custom sizes available.",
+  keywords: [
+    "furniture Nigeria",
+    "handmade sofa",
+    "custom furniture",
+    "luxury sofa Nigeria",
+    "ErimaGodsOwnEnterprise",
+  ],
+  openGraph: {
+    title: "ErimaGodsOwnEnterprise | Premium Furniture, Handmade to Order",
+    description:
+      "Premium handmade furniture — sofas, chairs, and more — finished by hand and delivered nationwide across Nigeria.",
+    siteName: "ErimaGodsOwnEnterprise",
+    locale: "en_NG",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
