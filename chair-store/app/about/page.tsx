@@ -1,6 +1,12 @@
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
+export const metadata = {
+  title: "About Us",
+  description:
+    "For over 15 years, ErimaGodsOwnEnterprise has been building handmade furniture — sofas and more — for homes and offices across Nigeria.",
+}
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#f5f1e8]">
