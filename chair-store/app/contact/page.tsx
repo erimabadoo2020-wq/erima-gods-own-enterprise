@@ -1,6 +1,12 @@
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
+export const metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with ErimaGodsOwnEnterprise via WhatsApp, email, or phone. We deliver furniture nationwide across Nigeria.",
+}
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#f5f1e8]">
