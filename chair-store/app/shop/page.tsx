@@ -12,6 +12,7 @@ export const metadata = {
 export default async function Shop() {
   const supabase = await createClient()
   const { data: products } = await supabase.from('products').select('*').eq('status', 'published').order('created_at', { ascending: false })
+  const { data: categories } = await supabase.from('categories').select('id, name').order('name')
 
   return (
     <div className="min-h-screen">
@@ -19,7 +20,7 @@ export default async function Shop() {
 
       <section className="px-8 py-16">
         <h1 className="font-display text-4xl text-center mb-8">Our Collection</h1>
-        <ShopGrid products={products || []} />
+        <ShopGrid products={products || []} categories={categories || []} />
       </section>
       <Footer />
     </div>
