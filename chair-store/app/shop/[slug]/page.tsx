@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { useCart } from '@/lib/cart-context'
+import { useWishlist } from '@/lib/wishlist-context'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
@@ -26,6 +27,7 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true)
   const [added, setAdded] = useState(false)
   const { addItem } = useCart()
+  const { isInWishlist, toggleItem } = useWishlist()
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -63,6 +65,8 @@ export default function ProductPage() {
     return <div className="min-h-screen bg-[#0a0a0a] text-[#f5f1e8] p-10">Product not found.</div>
   }
 
+  const saved = isInWishlist(product.id)
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -80,9 +84,41 @@ export default function ProductPage() {
           <p className="text-[#c9a24b] text-2xl font-medium mb-6">₦{Number(product.price).toLocaleString()}</p>
           <p className="text-[#9a9a9a] mb-8">{product.short_description}</p>
           <p className="text-sm text-[#9a9a9a] mb-8">{product.stock_quantity > 0 ? `${product.stock_quantity} in stock` : 'Out of stock'}</p>
-          <button onClick={handleAddToCart} disabled={product.stock_quantity === 0} className="inline-block bg-[#c9a24b] text-black px-8 py-3 text-sm tracking-wide font-medium hover:bg-[#dab868] transition-colors disabled:opacity-50">
-            {added ? 'Added!' : 'Add to Cart'}
-          </button>
+
+          <div className="flex items-center gap-4">
+            <button onClick={handleAddToCart} disabled={product.stock_quantity === 0} className="inline-block bg-[#c9a24b] text-black px-8 py-3 text-sm tracking-wide font-medium hover:bg-[#dab868] transition-colors disabled:opacity-50">
+              {added ? 'Added!' : 'Add to Cart'}
+            </button>
+
+            <button
+              onClick={() =>
+                toggleItem({
+                  id: product.id,
+                  name: product.name,
+                  price: Number(product.price),
+                  image_url: product.image_url,
+                  slug: product.slug,
+                })
+              }
+              aria-label={saved ? 'Remove from wishlist' : 'Add to wishlist'}
+              className="border border-[#c9a24b]/40 rounded-full p-3 hover:border-[#c9a24b] transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill={saved ? '#c9a24b' : 'none'}
+                stroke={saved ? '#c9a24b' : '#f5f1e8'}
+                strokeWidth={1.5}
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
 
