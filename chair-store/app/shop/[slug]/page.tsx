@@ -11,15 +11,18 @@ import Footer from '@/app/components/Footer'
 type Product = {
   id: string
   name: string
+  slug: string
   price: number
   short_description: string | null
   stock_quantity: number
   image_url: string | null
+  category_id: string | null
 }
 
 export default function ProductPage() {
   const params = useParams()
   const [product, setProduct] = useState<Product | null>(null)
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [added, setAdded] = useState(false)
   const { addItem } = useCart()
@@ -30,6 +33,17 @@ export default function ProductPage() {
       const { data } = await supabase.from('products').select('*').eq('slug', params.slug).eq('status', 'published').single()
       setProduct(data)
       setLoading(false)
+
+      if (data?.category_id) {
+        const { data: related } = await supabase
+          .from('products')
+          .select('*')
+          .eq('category_id', data.category_id)
+          .eq('status', 'published')
+          .neq('id', data.id)
+          .limit(3)
+        setRelatedProducts(related || [])
+      }
     }
     loadProduct()
   }, [params.slug])
@@ -71,6 +85,29 @@ export default function ProductPage() {
           </button>
         </div>
       </section>
+
+      {relatedProducts.length > 0 && (
+        <section className="px-8 py-16 border-t border-[#c9a24b]/20 max-w-5xl mx-auto">
+          <h2 className="font-display text-2xl text-center mb-10">You might also like</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {relatedProducts.map((item) => (
+              <Link href={`/shop/${item.slug}`} key={item.id} className="bg-[#141414] border border-[#c9a24b]/20 hover:border-[#c9a24b]/60 transition-colors block">
+                {item.image_url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={item.image_url} alt={item.name} className="h-56 w-full object-cover" />
+                ) : (
+                  <div className="h-56 bg-[#1a1a1a]" />
+                )}
+                <div className="p-6">
+                  <h3 className="font-display text-xl mb-2">{item.name}</h3>
+                  <p className="text-[#c9a24b] font-medium">₦{Number(item.price).toLocaleString()}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <Footer />
     </div>
   );
