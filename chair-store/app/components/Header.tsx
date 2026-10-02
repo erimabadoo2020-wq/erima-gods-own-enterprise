@@ -4,10 +4,12 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCart } from '@/lib/cart-context'
+import { useWishlist } from '@/lib/wishlist-context'
 
 export default function Header() {
   const { items } = useCart()
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
+  const { items: wishlistItems } = useWishlist()
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -32,6 +34,28 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-4">
+          <Link href="/wishlist" className="relative flex items-center text-[#f5f1e8]/80 hover:text-[#c9a24b] transition-colors">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+              />
+            </svg>
+            {wishlistItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#c9a24b] text-black text-xs w-5 h-5 flex items-center justify-center rounded-full font-medium">
+                {wishlistItems.length}
+              </span>
+            )}
+          </Link>
+
           <Link href="/cart" className="relative flex items-center text-[#f5f1e8]/80 hover:text-[#c9a24b] transition-colors">
             <svg
               xmlns="http://www.w3.org/2000/svg"
