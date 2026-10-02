@@ -43,9 +43,16 @@ function OrderConfirmationContent() {
       <section className="px-8 py-24 max-w-xl mx-auto text-center">
         <p className="text-[#c9a24b] text-sm tracking-[0.3em] mb-4">ORDER PLACED</p>
         <h1 className="font-display text-4xl mb-6">Thank you for your order</h1>
-        <p className="text-[#9a9a9a] mb-12">
+        <p className="text-[#9a9a9a] mb-6">
           We've received your order and will reach out shortly to confirm delivery details.
         </p>
+
+        {orderId && (
+          <div className="border border-[#c9a24b]/20 p-4 mb-8 inline-block">
+            <p className="text-xs text-[#9a9a9a] mb-1">Your Order ID (save this to track your order)</p>
+            <p className="text-[#c9a24b] font-mono text-sm break-all">{orderId}</p>
+          </div>
+        )}
 
         {!loading && orderItems.length > 0 && (
           <div className="border border-[#c9a24b]/20 mb-8 text-left">
@@ -62,7 +69,12 @@ function OrderConfirmationContent() {
           </div>
         )}
 
-        <Link href="/shop" className="inline-block bg-[#c9a24b] text-black px-8 py-3 text-sm font-medium hover:bg-[#dab868] transition-colors">Continue Shopping</Link>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link href="/shop" className="inline-block bg-[#c9a24b] text-black px-8 py-3 text-sm font-medium hover:bg-[#dab868] transition-colors">Continue Shopping</Link>
+          {orderId && (
+            <Link href={`/track-order?order=${orderId}`} className="inline-block border border-[#c9a24b] text-[#c9a24b] px-8 py-3 text-sm font-medium hover:bg-[#c9a24b] hover:text-black transition-colors">Track This Order</Link>
+          )}
+        </div>
       </section>
       <Footer />
     </div>
