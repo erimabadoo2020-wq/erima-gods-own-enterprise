@@ -19,6 +19,7 @@ export default function Footer() {
           <ul className="space-y-2">
             <li><a href="/shop" className="hover:text-[var(--gold)]">All furniture</a></li>
             <li><a href="/shop" className="hover:text-[var(--gold)]">Categories</a></li>
+            <li><a href="/track-order" className="hover:text-[var(--gold)]">Track Order</a></li>
           </ul>
         </div>
         <div>
