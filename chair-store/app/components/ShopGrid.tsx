@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import { useWishlist } from '@/lib/wishlist-context'
 
 type Product = {
   id: string
@@ -19,6 +20,44 @@ type Category = {
 }
 
 type SortOption = 'newest' | 'price-low' | 'price-high'
+
+function HeartButton({ product }: { product: Product }) {
+  const { isInWishlist, toggleItem } = useWishlist()
+  const saved = isInWishlist(product.id)
+
+  return (
+    <button
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        toggleItem({
+          id: product.id,
+          name: product.name,
+          price: Number(product.price),
+          image_url: product.image_url,
+          slug: product.slug,
+        })
+      }}
+      aria-label={saved ? 'Remove from wishlist' : 'Add to wishlist'}
+      className="absolute top-3 right-3 z-10 bg-black/50 rounded-full p-2 hover:bg-black/70 transition-colors"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill={saved ? '#c9a24b' : 'none'}
+        stroke={saved ? '#c9a24b' : '#f5f1e8'}
+        strokeWidth={1.5}
+        className="w-5 h-5"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+        />
+      </svg>
+    </button>
+  )
+}
 
 export default function ShopGrid({
   products,
@@ -94,7 +133,8 @@ export default function ShopGrid({
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {filteredProducts.map((product) => (
-            <Link href={`/shop/${product.slug}`} key={product.id} className="bg-[#141414] border border-[#c9a24b]/20 hover:border-[#c9a24b]/60 transition-colors block">
+            <Link href={`/shop/${product.slug}`} key={product.id} className="relative bg-[#141414] border border-[#c9a24b]/20 hover:border-[#c9a24b]/60 transition-colors block">
+              <HeartButton product={product} />
               {product.image_url ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={product.image_url} alt={product.name} className="h-56 w-full object-cover" />
