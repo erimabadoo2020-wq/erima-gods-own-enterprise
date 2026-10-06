@@ -30,6 +30,7 @@ export default function Header() {
           <a href="/" className="hover:text-[#c9a24b] transition-colors">Home</a>
           <a href="/shop" className="hover:text-[#c9a24b] transition-colors">Shop</a>
           <a href="/about" className="hover:text-[#c9a24b] transition-colors">About</a>
+          <a href="/blog" className="hover:text-[#c9a24b] transition-colors">Blog</a>
           <a href="/contact" className="hover:text-[#c9a24b] transition-colors">Contact</a>
         </nav>
 
@@ -108,6 +109,7 @@ export default function Header() {
           <a href="/" onClick={() => setMenuOpen(false)} className="py-3 border-b border-[#c9a24b]/10 hover:text-[#c9a24b] transition-colors">Home</a>
           <a href="/shop" onClick={() => setMenuOpen(false)} className="py-3 border-b border-[#c9a24b]/10 hover:text-[#c9a24b] transition-colors">Shop</a>
           <a href="/about" onClick={() => setMenuOpen(false)} className="py-3 border-b border-[#c9a24b]/10 hover:text-[#c9a24b] transition-colors">About</a>
+          <a href="/blog" onClick={() => setMenuOpen(false)} className="py-3 border-b border-[#c9a24b]/10 hover:text-[#c9a24b] transition-colors">Blog</a>
           <a href="/contact" onClick={() => setMenuOpen(false)} className="py-3 hover:text-[#c9a24b] transition-colors">Contact</a>
         </nav>
       )}
