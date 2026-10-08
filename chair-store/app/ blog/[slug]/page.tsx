@@ -45,10 +45,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <article className="px-8 py-16 max-w-2xl mx-auto">
         <Link href="/blog" className="text-sm text-[#c9a24b] hover:underline mb-8 inline-block">← Back to Blog</Link>
 
-        {post.cover_image_url && (
+        {post.video_url ? (
+          <video
+            src={post.video_url}
+            controls
+            className="w-full max-h-[500px] mb-8 border border-[#c9a24b]/20 bg-black"
+            poster={post.cover_image_url || undefined}
+          />
+        ) : post.cover_image_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={post.cover_image_url} alt={post.title} className="w-full h-64 object-cover mb-8 border border-[#c9a24b]/20" />
-        )}
+        ) : null}
 
         <p className="text-xs text-[#9a9a9a] mb-3">
           {new Date(post.created_at).toLocaleDateString('en-NG', { year: 'numeric', month: 'long', day: 'numeric' })}
