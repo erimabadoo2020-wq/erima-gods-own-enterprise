@@ -9,6 +9,12 @@ export const metadata = {
     "Furniture styling tips, care guides, and updates from ErimaGodsOwnEnterprise.",
 }
 
+function getYouTubeId(url: string | null): string | null {
+  if (!url) return null
+  const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/)
+  return match ? match[1] : null
+}
+
 export default async function BlogPage() {
   const supabase = await createClient()
   const { data: posts } = await supabase
@@ -30,41 +36,60 @@ export default async function BlogPage() {
           <p className="text-center text-[#9a9a9a]">No posts yet — check back soon.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {posts.map((post) => (
-              <Link href={`/blog/${post.slug}`} key={post.id} className="bg-[#141414] border border-[#c9a24b]/20 hover:border-[#c9a24b]/60 transition-colors block">
-                {post.video_url ? (
-                  <div className="relative h-48 w-full bg-black">
-                    <video
-                      src={`${post.video_url}#t=0.1`}
-                      muted
-                      playsInline
-                      preload="metadata"
-                      poster={post.cover_image_url || undefined}
-                      className="h-48 w-full object-cover"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div className="bg-black/60 rounded-full w-12 h-12 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#c9a24b" className="w-6 h-6 ml-0.5">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
+            {posts.map((post) => {
+              const youtubeId = getYouTubeId(post.video_url)
+              const thumb = post.cover_image_url || (youtubeId ? `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` : null)
+
+              return (
+                <Link href={`/blog/${post.slug}`} key={post.id} className="bg-[#141414] border border-[#c9a24b]/20 hover:border-[#c9a24b]/60 transition-colors block">
+                  {youtubeId ? (
+                    <div className="relative h-48 w-full bg-black">
+                      {thumb && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={thumb} alt={post.title} className="h-48 w-full object-cover" />
+                      )}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="bg-black/60 rounded-full w-12 h-12 flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#c9a24b" className="w-6 h-6 ml-0.5">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
+                  ) : post.video_url ? (
+                    <div className="relative h-48 w-full bg-black">
+                      <video
+                        src={`${post.video_url}#t=0.1`}
+                        muted
+                        playsInline
+                        preload="metadata"
+                        poster={post.cover_image_url || undefined}
+                        className="h-48 w-full object-cover"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="bg-black/60 rounded-full w-12 h-12 flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#c9a24b" className="w-6 h-6 ml-0.5">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  ) : post.cover_image_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={post.cover_image_url} alt={post.title} className="h-48 w-full object-cover" />
+                  ) : (
+                    <div className="h-48 bg-[#1a1a1a]" />
+                  )}
+                  <div className="p-6">
+                    <p className="text-xs text-[#9a9a9a] mb-2">
+                      {new Date(post.created_at).toLocaleDateString('en-NG', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </p>
+                    <h2 className="font-display text-xl mb-2">{post.title}</h2>
+                    <p className="text-[#9a9a9a] text-sm">{post.excerpt}</p>
                   </div>
-                ) : post.cover_image_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={post.cover_image_url} alt={post.title} className="h-48 w-full object-cover" />
-                ) : (
-                  <div className="h-48 bg-[#1a1a1a]" />
-                )}
-                <div className="p-6">
-                  <p className="text-xs text-[#9a9a9a] mb-2">
-                    {new Date(post.created_at).toLocaleDateString('en-NG', { year: 'numeric', month: 'long', day: 'numeric' })}
-                  </p>
-                  <h2 className="font-display text-xl mb-2">{post.title}</h2>
-                  <p className="text-[#9a9a9a] text-sm">{post.excerpt}</p>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              )
+            })}
           </div>
         )}
       </section>
