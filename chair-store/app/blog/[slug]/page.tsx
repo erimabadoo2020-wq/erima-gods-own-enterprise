@@ -3,6 +3,12 @@ import Link from 'next/link'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 
+function getYouTubeId(url: string | null): string | null {
+  if (!url) return null
+  const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/)
+  return match ? match[1] : null
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const supabase = await createClient()
@@ -37,6 +43,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   const paragraphs = (post.content || '').split('\n').filter((p: string) => p.trim() !== '')
+  const youtubeId = getYouTubeId(post.video_url)
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#f5f1e8]">
@@ -45,7 +52,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <article className="px-8 py-16 max-w-2xl mx-auto">
         <Link href="/blog" className="text-sm text-[#c9a24b] hover:underline mb-8 inline-block">← Back to Blog</Link>
 
-        {post.video_url ? (
+        {youtubeId ? (
+          <div className="relative w-full mb-8 border border-[#c9a24b]/20 bg-black" style={{ aspectRatio: '16 / 9' }}>
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+              title={post.title}
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        ) : post.video_url ? (
           <video
             src={post.video_url}
             controls
