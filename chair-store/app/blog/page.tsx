@@ -32,7 +32,25 @@ export default async function BlogPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {posts.map((post) => (
               <Link href={`/blog/${post.slug}`} key={post.id} className="bg-[#141414] border border-[#c9a24b]/20 hover:border-[#c9a24b]/60 transition-colors block">
-                {post.cover_image_url ? (
+                {post.video_url ? (
+                  <div className="relative h-48 w-full bg-black">
+                    <video
+                      src={`${post.video_url}#t=0.1`}
+                      muted
+                      playsInline
+                      preload="metadata"
+                      poster={post.cover_image_url || undefined}
+                      className="h-48 w-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="bg-black/60 rounded-full w-12 h-12 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#c9a24b" className="w-6 h-6 ml-0.5">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                ) : post.cover_image_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={post.cover_image_url} alt={post.title} className="h-48 w-full object-cover" />
                 ) : (
